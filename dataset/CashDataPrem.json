@@ -1,0 +1,51 @@
+{
+	"name": "CashDataPrem",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CashDataPrem",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "cashstatements_150924.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "Description",
+				"type": "String"
+			},
+			{
+				"name": "Reference",
+				"type": "String"
+			},
+			{
+				"name": "Settlement date",
+				"type": "String"
+			},
+			{
+				"name": "Receipt (GBP)",
+				"type": "String"
+			},
+			{
+				"name": "Payment (GBP)",
+				"type": "String"
+			},
+			{
+				"name": "Balance (GBP)",
+				"type": "String"
+			}
+		]
+	}
+}
