@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "IMRADFDEV"
 		},
+		"CashDataTarget_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'CashDataTarget'"
+		},
 		"CashDataPrem_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'CashDataPrem'"
@@ -25,6 +29,19 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/CashDataTarget')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('CashDataTarget_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/InvestmentCashFlow')]",
 			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
 			"apiVersion": "2018-06-01",
@@ -33,6 +50,34 @@
 				"typeProperties": {}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CashDataAzure')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CashDataTarget",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "CashDataTarget.csv",
+						"container": "raw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CashDataTarget')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/CashDataPrem')]",

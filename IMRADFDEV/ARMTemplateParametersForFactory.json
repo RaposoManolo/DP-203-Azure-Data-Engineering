@@ -8,6 +8,9 @@
 		"CashDataPrem_password": {
 			"value": ""
 		},
+		"CashDataTarget_connectionString": {
+			"value": ""
+		},
 		"CashDataPrem_properties_typeProperties_host": {
 			"value": "C:\\Users\\IMRaposo\\Documents\\Az203\\Data"
 		},
