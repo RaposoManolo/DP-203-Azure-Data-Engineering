@@ -1,0 +1,9 @@
+{
+	"name": "IMRADFDEV",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "378a657f-ac87-4f20-af72-269249f622d5",
+		"tenantId": "6ee58128-12e1-44c5-aca4-64da594b1bb6"
+	}
+}
