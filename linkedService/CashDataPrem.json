@@ -1,0 +1,17 @@
+{
+	"name": "CashDataPrem",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Users\\IMRaposo\\Documents\\Az203\\Data",
+			"userId": "IMRaposo",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2OGEzNjhiZi00NmQ1LTQ2OWUtODUxNi0xZmRjOGE5OGE5ODMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "InvestmentCashFlow",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
