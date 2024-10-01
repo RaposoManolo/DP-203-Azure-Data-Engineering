@@ -1,0 +1,12 @@
+{
+	"name": "ingestFileDate",
+	"properties": {
+		"parameters": {
+			"ingestFileDate": {
+				"type": "string",
+				"defaultValue": "160924"
+			}
+		},
+		"annotations": []
+	}
+}
