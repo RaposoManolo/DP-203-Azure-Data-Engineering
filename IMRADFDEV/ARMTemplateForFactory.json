@@ -120,7 +120,7 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"fileName": {
-							"value": "@concat('CashStatements_', formatDateTime(utcNow(), 'ddmmyyyy'), 'csv')",
+							"value": "@concat('CashStatements_', formatDateTime(utcNow(), 'ddmmyyyy'), '.csv')",
 							"type": "Expression"
 						},
 						"folderPath": "Project 1 - Dividends",
@@ -191,35 +191,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/CashDataPrem')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CashStatementTarget')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CashDataTarget",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@concat('CashStatement', '/', formatDateTime(utcnow(),'ddmmyyyy'))",
-							"type": "Expression"
-						},
-						"folderPath": "Project 1 - Dividends",
-						"container": "bronze"
-					},
-					"compressionCodec": "none"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CashDataTarget')]"
 			]
 		},
 		{
