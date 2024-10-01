@@ -11,7 +11,7 @@
 			"location": {
 				"type": "FileServerLocation",
 				"fileName": {
-					"value": "cashstatements_*.csv",
+					"value": "cashstatements_150924.csv",
 					"type": "Expression"
 				}
 			},
