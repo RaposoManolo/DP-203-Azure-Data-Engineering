@@ -1,0 +1,24 @@
+{
+	"name": "CashStatementTarget",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CashDataTarget",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat('CashStatement', '/', formatDateTime(utcnow(),'ddmmyyyy'))",
+					"type": "Expression"
+				},
+				"folderPath": "Project 1 - Dividends",
+				"container": "bronze"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
