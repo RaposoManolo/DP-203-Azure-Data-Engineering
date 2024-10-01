@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "@concat('CashStatements_', formatDateTime(utcNow(), 'ddmmyyyy'))",
+					"value": "@concat('CashStatements_', formatDateTime(utcNow(), 'ddmmyyyy'), 'csv')",
 					"type": "Expression"
 				},
 				"folderPath": "Project 1 - Dividends",

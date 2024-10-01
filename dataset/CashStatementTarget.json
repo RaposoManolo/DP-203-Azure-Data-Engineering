@@ -17,7 +17,7 @@
 				"folderPath": "Project 1 - Dividends",
 				"container": "bronze"
 			},
-			"compressionCodec": "snappy"
+			"compressionCodec": "none"
 		},
 		"schema": []
 	}
