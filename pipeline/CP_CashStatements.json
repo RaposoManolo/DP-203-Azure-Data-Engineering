@@ -21,6 +21,7 @@
 							"type": "FileServerReadSettings",
 							"recursive": true,
 							"modifiedDatetimeStart": null,
+							"wildcardFileName": "cashstatements_*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
