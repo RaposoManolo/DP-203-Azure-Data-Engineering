@@ -10,8 +10,12 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "CashDataTarget.csv",
-				"container": "raw"
+				"fileName": {
+					"value": "@concat('CashStatements', formatDateTime(utcNow(), 'ddmmyyyy'))",
+					"type": "Expression"
+				},
+				"folderPath": "Project 1 - Dividends",
+				"container": "bronze"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
