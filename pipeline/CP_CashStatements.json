@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "FileServerReadSettings",
 							"recursive": true,
-							"modifiedDatetimeStart": "2024-09-30T22:00:00.000Z",
+							"modifiedDatetimeStart": null,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
