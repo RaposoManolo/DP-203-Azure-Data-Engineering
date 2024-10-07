@@ -1,0 +1,14 @@
+{
+	"name": "AzureSql_ADFLogs",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "imrstockbondvalue.database.windows.net",
+			"database": "IMRStockBondsValue",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
