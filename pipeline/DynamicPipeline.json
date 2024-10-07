@@ -1,0 +1,54 @@
+{
+	"name": "DynamicPipeline",
+	"properties": {
+		"activities": [
+			{
+				"name": "GetTables",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "select quotename (t.name) as tablename,\nQuotename(schema_Name(t.schema_id)) As shemaName\nfrom sys.tables as t",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "GenericDataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"serverName": {
+								"value": "@pipeline().parameters.serverName",
+								"type": "Expression"
+							},
+							"databaseName": {
+								"value": "@pipeline().parameters.databaseName",
+								"type": "Expression"
+							}
+						}
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"parameters": {
+			"serverName": {
+				"type": "string",
+				"defaultValue": "imrstockbondvalue.database.windows.net"
+			},
+			"databaseName": {
+				"type": "string",
+				"defaultValue": "IMRStockBondsValue"
+			}
+		},
+		"annotations": []
+	}
+}
