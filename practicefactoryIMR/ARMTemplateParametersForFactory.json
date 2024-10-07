@@ -5,6 +5,12 @@
 		"factoryName": {
 			"value": "practicefactoryIMR"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://203practice.dfs.core.windows.net/"
+		},
 		"GenericAzureSQLDB_LS_properties_typeProperties_server": {
 			"value": "@{linkedService().serverName}"
 		},
