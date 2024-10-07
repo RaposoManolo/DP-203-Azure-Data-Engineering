@@ -1,0 +1,68 @@
+{
+	"name": "AzureSql_ADFLogs",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSql_ADFLogs",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "LogId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PipelineName",
+				"type": "varchar"
+			},
+			{
+				"name": "PipelineRunID",
+				"type": "varchar"
+			},
+			{
+				"name": "StartTime",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "EndTime",
+				"type": "datetime2",
+				"scale": 0
+			},
+			{
+				"name": "DurationSeconds",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Inserts",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Updates",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Deletes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ErrorMessage",
+				"type": "varchar"
+			},
+			{
+				"name": "StatusMessage",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Logging",
+			"table": "PipelineLogs"
+		}
+	}
+}
