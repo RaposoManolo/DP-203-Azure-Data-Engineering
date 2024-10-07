@@ -1,0 +1,44 @@
+{
+	"name": "GenericADLS_CSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureDataLakeStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"serverName": {
+				"type": "string"
+			},
+			"databaseName": {
+				"type": "string"
+			},
+			"schemaName": {
+				"type": "string"
+			},
+			"tableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().schemaName, '_', dataset().tableName, 'csv')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@concat(\n\n    dataset().serverName,\n    '/',\n    dataset().databaseName,\n    '/Year=',\n    formatDateTime(utcNow(),'yyyy'),\n    '/Month=',\n    formatDateTime(utcNow(),'MM'),\n    '/Day=',\n    formatDateTime(utcNow(),'dd')\n)",
+					"type": "Expression"
+				},
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

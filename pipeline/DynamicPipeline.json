@@ -37,6 +37,111 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "Iterate over all tables",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "GetTables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('GetTables').output.value",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "CopyDataFromLoop",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"sqlReaderQuery": {
+										"value": "@concat('SELECT * FROM', item().schemaName, '.', item().databaseName)",
+										"type": "Expression"
+									},
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "GenericDataset",
+									"type": "DatasetReference",
+									"parameters": {
+										"serverName": {
+											"value": "@pipeline().parameters.serverName",
+											"type": "Expression"
+										},
+										"databaseName": {
+											"value": "@pipeline().parameters.databaseName",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "GenericADLS_CSV",
+									"type": "DatasetReference",
+									"parameters": {
+										"serverName": {
+											"value": "@pipeline().parameters.serverName",
+											"type": "Expression"
+										},
+										"databaseName": {
+											"value": "@pipeline().parameters.databaseName",
+											"type": "Expression"
+										},
+										"schemaName": {
+											"value": "@item().schemaName",
+											"type": "Expression"
+										},
+										"tableName": {
+											"value": "@item().tableName",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
