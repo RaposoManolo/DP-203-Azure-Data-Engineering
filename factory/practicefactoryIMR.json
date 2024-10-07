@@ -1,0 +1,9 @@
+{
+	"name": "practicefactoryIMR",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "bec4d699-d886-4709-b37e-98951837e8cd",
+		"tenantId": "6ee58128-12e1-44c5-aca4-64da594b1bb6"
+	}
+}
