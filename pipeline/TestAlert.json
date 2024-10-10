@@ -1,0 +1,30 @@
+{
+	"name": "TestAlert",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "TestAlert1",
+							"value": {
+								"type": "Int",
+								"content": []
+							}
+						}
+					],
+					"setSystemVariable": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
