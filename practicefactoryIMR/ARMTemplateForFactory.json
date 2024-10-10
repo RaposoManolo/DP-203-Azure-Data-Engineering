@@ -104,7 +104,7 @@
 										"source": {
 											"type": "AzureSqlSource",
 											"sqlReaderQuery": {
-												"value": "@concat('SELECT * FROM', item().schemaName, '.', item().databaseName)",
+												"value": "@concat('SELECT * FROM', item().schemaName, '.', item().tableName)",
 												"type": "Expression"
 											},
 											"queryTimeout": "02:00:00",
@@ -225,7 +225,7 @@
 					"location": {
 						"type": "AzureBlobFSLocation",
 						"fileName": {
-							"value": "@concat(dataset().schemaName, '_', dataset().tableName, 'csv')",
+							"value": "@concat(dataset().schemaName, '_', dataset().tableName, '.csv')",
 							"type": "Expression"
 						},
 						"folderPath": {
