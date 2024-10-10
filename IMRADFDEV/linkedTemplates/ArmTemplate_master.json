@@ -15,6 +15,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CashDataTarget'"
 		},
+		"AzureSql_ADFLogs_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "imrstockbondvalue.database.windows.net"
+		},
+		"AzureSql_ADFLogs_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "IMRStockBondsValue"
+		},
 		"CashDataPrem_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "C:\\Users\\IMRaposo\\Documents\\Az203\\Data"
@@ -55,6 +63,12 @@
 					},
 					"CashDataPrem_password": {
 						"value": "[parameters('CashDataPrem_password')]"
+					},
+					"AzureSql_ADFLogs_properties_typeProperties_server": {
+						"value": "[parameters('AzureSql_ADFLogs_properties_typeProperties_server')]"
+					},
+					"AzureSql_ADFLogs_properties_typeProperties_database": {
+						"value": "[parameters('AzureSql_ADFLogs_properties_typeProperties_database')]"
 					},
 					"CashDataPrem_properties_typeProperties_host": {
 						"value": "[parameters('CashDataPrem_properties_typeProperties_host')]"
