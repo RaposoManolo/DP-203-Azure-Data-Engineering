@@ -103,7 +103,7 @@
 							"type": "Expression"
 						},
 						"folderPath": {
-							"value": "@concat(\n\n    dataset().serverName,\n    '/',\n    dataset().databaseName,\n    '/Year=',\n    formatDateTime(utcNow(),'yyyy'),\n    '/Month=',\n    formatDateTime(utcNow(),'MM'),\n    '/Day=',\n    formatDateTime(utcNow(),'dd')\n)",
+							"value": "@concat(\n    dataset().serverName,'/', dataset().databaseName, '/Year=', formatDateTime(utcNow(),'yyyy'),'/Month=', formatDateTime(utcNow(),'MM'), '/Day=', formatDateTime(utcNow(),'dd')\n)",
 							"type": "Expression"
 						},
 						"fileSystem": "raw"
@@ -153,6 +153,55 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/GenericAzureSQLDB_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GenericADLS_CSV_NewBranch')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"serverName": {
+						"type": "string"
+					},
+					"databaseName": {
+						"type": "string"
+					},
+					"schemaName": {
+						"type": "string"
+					},
+					"tableName": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().schemaName, '_', dataset().tableName, '.csv')",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat(\n    dataset().serverName,'/', dataset().databaseName, '/Year=', formatDateTime(utcNow(),'yyyy'),'/Month=', formatDateTime(utcNow(),'MM'), '/Day=', formatDateTime(utcNow(),'dd')\n)",
+							"type": "Expression"
+						},
+						"fileSystem": "fromnewbranch"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
 			]
 		},
 		{
