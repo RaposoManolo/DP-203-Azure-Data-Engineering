@@ -11,6 +11,9 @@
 		"CashDataTarget_connectionString": {
 			"value": ""
 		},
+		"APISource_ADLSgen2_accountKey": {
+			"value": ""
+		},
 		"AzureSql_ADFLogs_properties_typeProperties_server": {
 			"value": "imrstockbondvalue.database.windows.net"
 		},
@@ -22,6 +25,12 @@
 		},
 		"CashDataPrem_properties_typeProperties_userId": {
 			"value": "IMRaposo"
+		},
+		"TestLinkAPI_properties_typeProperties_url": {
+			"value": "https://www.alphavantage.co"
+		},
+		"APISource_ADLSgen2_properties_typeProperties_url": {
+			"value": "https://imrdatalakedev.dfs.core.windows.net/"
 		}
 	}
 }

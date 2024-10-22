@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'CashDataTarget'"
 		},
+		"APISource_ADLSgen2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'APISource_ADLSgen2'"
+		},
 		"AzureSql_ADFLogs_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "imrstockbondvalue.database.windows.net"
@@ -30,6 +34,14 @@
 		"CashDataPrem_properties_typeProperties_userId": {
 			"type": "string",
 			"defaultValue": "IMRaposo"
+		},
+		"TestLinkAPI_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://www.alphavantage.co"
+		},
+		"APISource_ADLSgen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://imrdatalakedev.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -61,6 +73,9 @@
 					"CashDataTarget_connectionString": {
 						"value": "[parameters('CashDataTarget_connectionString')]"
 					},
+					"APISource_ADLSgen2_accountKey": {
+						"value": "[parameters('APISource_ADLSgen2_accountKey')]"
+					},
 					"CashDataPrem_password": {
 						"value": "[parameters('CashDataPrem_password')]"
 					},
@@ -69,6 +84,12 @@
 					},
 					"AzureSql_ADFLogs_properties_typeProperties_database": {
 						"value": "[parameters('AzureSql_ADFLogs_properties_typeProperties_database')]"
+					},
+					"TestLinkAPI_properties_typeProperties_url": {
+						"value": "[parameters('TestLinkAPI_properties_typeProperties_url')]"
+					},
+					"APISource_ADLSgen2_properties_typeProperties_url": {
+						"value": "[parameters('APISource_ADLSgen2_properties_typeProperties_url')]"
 					},
 					"CashDataPrem_properties_typeProperties_host": {
 						"value": "[parameters('CashDataPrem_properties_typeProperties_host')]"
