@@ -298,7 +298,7 @@
 				"annotations": [],
 				"type": "RestResource",
 				"typeProperties": {
-					"relativeUrl": "/query?function=INCOME_STATEMENT&symbol={'OZK'}&apikey={'XA85RWESU891KKD3'}"
+					"relativeUrl": "/query?function=INCOME_STATEMENT&symbol=OZK&apikey=XA85RWESU891KKD3"
 				},
 				"schema": []
 			},
