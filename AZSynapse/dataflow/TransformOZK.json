@@ -1,0 +1,132 @@
+{
+	"name": "TransformOZK",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "JsonOZK",
+						"type": "DatasetReference"
+					},
+					"name": "RawOZK"
+				}
+			],
+			"sinks": [
+				{
+					"linkedService": {
+						"referenceName": "AddtionalDL",
+						"type": "LinkedServiceReference"
+					},
+					"name": "TSaveOZK"
+				}
+			],
+			"transformations": [
+				{
+					"name": "flattenOZK"
+				},
+				{
+					"name": "FilterYear"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "ChangeDateFormat"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          annualReports as (comprehensiveIncomeNetOfTax as string, costOfRevenue as string, costofGoodsAndServicesSold as string, depreciation as string, depreciationAndAmortization as integer, ebit as integer, ebitda as integer, fiscalDateEnding as date, grossProfit as long, incomeBeforeTax as integer, incomeTaxExpense as integer, interestAndDebtExpense as string, interestExpense as integer, interestIncome as string, investmentIncomeNet as string, netIncome as integer, netIncomeFromContinuingOperations as string, netInterestIncome as string, nonInterestIncome as string, operatingExpenses as integer, operatingIncome as integer, otherNonOperatingIncome as string, reportedCurrency as string, researchAndDevelopment as string, sellingGeneralAndAdministrative as integer, totalRevenue as long)[],",
+				"          quarterlyReports as (comprehensiveIncomeNetOfTax as string, costOfRevenue as string, costofGoodsAndServicesSold as string, depreciation as string, depreciationAndAmortization as integer, ebit as integer, ebitda as integer, fiscalDateEnding as date, grossProfit as integer, incomeBeforeTax as integer, incomeTaxExpense as integer, interestAndDebtExpense as string, interestExpense as integer, interestIncome as string, investmentIncomeNet as string, netIncome as integer, netIncomeFromContinuingOperations as integer, netInterestIncome as string, nonInterestIncome as string, operatingExpenses as integer, operatingIncome as integer, otherNonOperatingIncome as string, reportedCurrency as string, researchAndDevelopment as string, sellingGeneralAndAdministrative as integer, totalRevenue as integer)[],",
+				"          symbol as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> RawOZK",
+				"RawOZK foldDown(unroll(annualReports, annualReports),",
+				"     mapColumn(",
+				"          comprehensiveIncomeNetOfTax = annualReports.comprehensiveIncomeNetOfTax,",
+				"          costOfRevenue = annualReports.costOfRevenue,",
+				"          costofGoodsAndServicesSold = annualReports.costofGoodsAndServicesSold,",
+				"          depreciation = annualReports.depreciation,",
+				"          depreciationAndAmortization = annualReports.depreciationAndAmortization,",
+				"          ebit = annualReports.ebit,",
+				"          ebitda = annualReports.ebitda,",
+				"          fiscalDateEnding = annualReports.fiscalDateEnding,",
+				"          grossProfit = annualReports.grossProfit,",
+				"          incomeBeforeTax = annualReports.incomeBeforeTax,",
+				"          incomeTaxExpense = annualReports.incomeTaxExpense,",
+				"          interestAndDebtExpense = annualReports.interestAndDebtExpense,",
+				"          interestExpense = annualReports.interestExpense,",
+				"          interestIncome = annualReports.interestIncome,",
+				"          investmentIncomeNet = annualReports.investmentIncomeNet,",
+				"          netIncome = annualReports.netIncome,",
+				"          netIncomeFromContinuingOperations = annualReports.netIncomeFromContinuingOperations,",
+				"          netInterestIncome = annualReports.netInterestIncome,",
+				"          nonInterestIncome = annualReports.nonInterestIncome,",
+				"          operatingExpenses = annualReports.operatingExpenses,",
+				"          operatingIncome = annualReports.operatingIncome,",
+				"          otherNonOperatingIncome = annualReports.otherNonOperatingIncome,",
+				"          reportedCurrency = annualReports.reportedCurrency,",
+				"          researchAndDevelopment = annualReports.researchAndDevelopment,",
+				"          sellingGeneralAndAdministrative = annualReports.sellingGeneralAndAdministrative,",
+				"          totalRevenue = annualReports.totalRevenue",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> flattenOZK",
+				"flattenOZK filter(year(fiscalDateEnding)>=2020) ~> FilterYear",
+				"FilterYear select(mapColumn(",
+				"          depreciationAndAmortization,",
+				"          ebitda,",
+				"          ebit,",
+				"          fiscalDateEnding,",
+				"          grossProfit,",
+				"          incomeBeforeTax,",
+				"          incomeTaxExpense,",
+				"          interestAndDebtExpense,",
+				"          interestExpense,",
+				"          interestIncome,",
+				"          investmentIncomeNet,",
+				"          netIncome,",
+				"          netIncomeFromContinuingOperations,",
+				"          netInterestIncome,",
+				"          nonInterestIncome,",
+				"          operatingExpenses,",
+				"          operatingIncome,",
+				"          otherNonOperatingIncome,",
+				"          reportedCurrency,",
+				"          sellingGeneralAndAdministrative,",
+				"          totalRevenue",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 cast(output(",
+				"          fiscalDateEnding as date 'dd/MM/yyyy'",
+				"     ),",
+				"     errors: true) ~> ChangeDateFormat",
+				"ChangeDateFormat sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'delta',",
+				"     compressionType: 'snappy',",
+				"     compressionLevel: 'Fastest',",
+				"     fileSystem: 'raw',",
+				"     folderPath: 'silverOZK/T-OZK',",
+				"     mergeSchema: false,",
+				"     autoCompact: false,",
+				"     optimizedWrite: false,",
+				"     vacuum: 0,",
+				"     deletable: false,",
+				"     insertable: true,",
+				"     updateable: false,",
+				"     upsertable: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> TSaveOZK"
+			]
+		}
+	}
+}
