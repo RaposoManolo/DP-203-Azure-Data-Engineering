@@ -1,0 +1,11 @@
+{
+	"name": "testsynapsebi",
+	"properties": {
+		"annotations": [],
+		"type": "PowerBIWorkspace",
+		"typeProperties": {
+			"workspaceID": "testBI",
+			"tenantID": "6ee58128-12e1-44c5-aca4-64da594b1bb6"
+		}
+	}
+}
